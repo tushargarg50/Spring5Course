@@ -5,7 +5,7 @@ import java.util.Map;
 
 public abstract class AbstractCrudServiceImpl<T, ID> implements CrudService<T, ID> {
 
-    public abstract Map<ID, T> getMap();
+    protected abstract Map<ID, T> getMap();
 
     @Override
     public T findById(ID id) {
