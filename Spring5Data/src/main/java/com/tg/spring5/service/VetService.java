@@ -5,13 +5,5 @@ import com.tg.spring5.model.Vet;
 
 import java.util.List;
 
-public interface VetService {
-
-    Vet findById(Long id);
-
-    Vet save(Vet pet);
-
-    boolean delete(Vet pet);
-
-    List<Vet> findAll();
+public interface VetService extends CrudService<Vet, Long> {
 }
