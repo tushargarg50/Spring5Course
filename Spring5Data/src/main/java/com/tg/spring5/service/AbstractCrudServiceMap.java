@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class AbstractCrudServiceMapImpl<T extends BaseEntity, ID extends Long> implements CrudService<T, ID> {
+public abstract class AbstractCrudServiceMap<T extends BaseEntity, ID extends Long> implements CrudService<T, ID> {
 
     private Map<ID, T> map = new HashMap<>();
 

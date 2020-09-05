@@ -3,12 +3,12 @@ package com.tg.spring5.service.impl;
 import com.tg.spring5.model.Address;
 import com.tg.spring5.model.Owner;
 import com.tg.spring5.model.Pet;
-import com.tg.spring5.service.AbstractCrudServiceMapImpl;
+import com.tg.spring5.service.AbstractCrudServiceMap;
 import com.tg.spring5.service.CrudService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OwnerService extends AbstractCrudServiceMapImpl<Owner, Long> {
+public class OwnerService extends AbstractCrudServiceMap<Owner, Long> {
 
     private final CrudService<Address, Long> addressService;
     private final CrudService<Pet, Long> petService;
