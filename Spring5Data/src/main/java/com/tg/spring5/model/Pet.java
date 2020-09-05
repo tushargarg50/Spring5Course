@@ -1,34 +1,64 @@
 package com.tg.spring5.model;
 
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
+import java.util.Objects;
 
+@Entity
 public class Pet extends BaseEntity {
 
-    private PetType petType;
+    @Convert(converter = PetTypeConverter.class)
+    private final PetType petType;
+    private final String name;
+    private final LocalDate birthDate;
+    @ManyToOne
     private Owner owner;
-    private LocalDate birthDate;
+
+    public Pet(PetType petType, String name, LocalDate birthDate) {
+        this.petType = petType;
+        this.name = name;
+        this.birthDate = birthDate;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public LocalDate getBirthDate() {
         return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
     }
 
     public Owner getOwner() {
         return owner;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
-    }
-
     public PetType getPetType() {
         return petType;
     }
 
-    public void setPetType(PetType petType) {
-        this.petType = petType;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return petType == pet.petType &&
+                Objects.equals(name, pet.name) &&
+                Objects.equals(birthDate, pet.birthDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(petType, name, birthDate);
+    }
+
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "petType=" + petType +
+                ", name='" + name + '\'' +
+                ", birthDate=" + birthDate +
+                "} " + super.toString();
     }
 }
