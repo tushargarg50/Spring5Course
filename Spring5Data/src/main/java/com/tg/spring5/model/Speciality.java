@@ -1,17 +1,33 @@
 package com.tg.spring5.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Table(name = "specialities")
 public class Speciality extends BaseEntity {
 
-    private final String specialityName;
-    private final String description;
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "specialities")
+    private final Set<Vet> vets;
+    @Column
+    private String specialityName;
+    @Column
+    private String description;
+
+    public Speciality() {
+        vets = new HashSet<>();
+    }
 
     public Speciality(String specialityName, String description) {
         this.specialityName = specialityName;
         this.description = description;
+        vets = new HashSet<>();
+    }
+
+    public Set<Vet> getVets() {
+        return vets;
     }
 
     public String getSpecialityName() {
@@ -20,6 +36,10 @@ public class Speciality extends BaseEntity {
 
     public String getDescription() {
         return description;
+    }
+
+    protected void addVet(Vet vet) {
+        vets.add(vet);
     }
 
     @Override

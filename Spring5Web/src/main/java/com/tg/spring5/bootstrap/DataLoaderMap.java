@@ -6,8 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Component
 public class DataLoaderMap implements CommandLineRunner {
@@ -37,45 +35,33 @@ public class DataLoaderMap implements CommandLineRunner {
         Pet pet3 = new Pet(PetType.CAT, "Billi", LocalDate.now());
         Pet pet4 = new Pet(PetType.CAT, "Pussy", LocalDate.now());
 
-        Set<Pet> ownersPet = new HashSet<>();
-        ownersPet.add(pet);
-        ownersPet.add(pet2);
-
-        Owner owner = new Owner("A", "A", address, ownersPet);
+        Owner owner = new Owner("A", "A", address);
+        owner.addPet(pet);
+        owner.addPet(pet2);
         ownerService.save(owner);
 
-        ownersPet = new HashSet<>();
-        ownersPet.add(pet3);
-
-        owner = new Owner("B", "B", address2, ownersPet);
+        owner = new Owner("B", "B", address2);
+        owner.addPet(pet3);
         ownerService.save(owner);
 
-        ownersPet = new HashSet<>();
-        ownersPet.add(pet4);
-
-        owner = new Owner("C", "C", address3, ownersPet);
+        owner = new Owner("C", "C", address3);
+        owner.addPet(pet4);
         ownerService.save(owner);
 
         Speciality speciality = new Speciality("Surgeon", "Surgeon");
         Speciality speciality2 = new Speciality("Dentist", "dentist");
         Speciality speciality3 = new Speciality("Check-up", "Check-Up");
 
-        Set<Speciality> specialities = new HashSet<>();
-        specialities.add(speciality);
-
-        Vet vet = new Vet("A", "A", address3, specialities);
+        Vet vet = new Vet("A", "A", address3);
+        vet.addSpeciality(speciality);
         vetService.save(vet);
 
-        specialities = new HashSet<>();
-        specialities.add(speciality2);
-
-        vet = new Vet("B", "B", address2, specialities);
+        vet = new Vet("B", "B", address2);
+        vet.addSpeciality(speciality2);
         vetService.save(vet);
 
-        specialities = new HashSet<>();
-        specialities.add(speciality3);
-
-        vet = new Vet("C", "C", address, specialities);
+        vet = new Vet("C", "C", address);
+        vet.addSpeciality(speciality3);
         vetService.save(vet);
 
         specialityService.findAll();

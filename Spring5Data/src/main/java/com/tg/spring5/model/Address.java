@@ -1,14 +1,23 @@
 package com.tg.spring5.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @Entity
+@Table(name = "Addresses")
 public class Address extends BaseEntity {
 
-    private final String address;
-    private final String city;
-    private final String state;
+    @Column
+    private String address;
+    @Column
+    private String city;
+    @Column
+    private String state;
+
+    public Address() {
+    }
 
     public Address(String address, String city, String state) {
         this.address = address;

@@ -1,13 +1,18 @@
 package com.tg.spring5.model;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
 import java.util.Objects;
 
 @MappedSuperclass
 public class Person extends BaseEntity {
 
+    @Column
     private final String firstName;
+    @Column
     private final String lastName;
+    @OneToOne
     private final Address address;
 
     public Person(String firstName, String lastName, Address address) {

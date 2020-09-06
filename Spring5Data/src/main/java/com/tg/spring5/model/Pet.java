@@ -1,22 +1,25 @@
 package com.tg.spring5.model;
 
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 public class Pet extends BaseEntity {
 
+    @Column
     @Convert(converter = PetTypeConverter.class)
-    private final PetType petType;
-    private final String name;
-    private final LocalDate birthDate;
-    @ManyToOne
+    private PetType petType;
+    @Column
+    private String name;
+    @Column
+    private LocalDate birthDate;
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "owner_id")
     private Owner owner;
+
+    public Pet() {
+    }
 
     public Pet(PetType petType, String name, LocalDate birthDate) {
         this.petType = petType;
@@ -34,6 +37,10 @@ public class Pet extends BaseEntity {
 
     public Owner getOwner() {
         return owner;
+    }
+
+    protected void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     public PetType getPetType() {
