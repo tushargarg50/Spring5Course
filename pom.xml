@@ -14,7 +14,7 @@
     </parent>
     <groupId>com.tg</groupId>
     <artifactId>springcourse</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4-SNAPSHOT</version>
     <name>Spring 5 Course</name>
     <description>Spring 5 Course by Spring framework Guru</description>
 
@@ -41,6 +41,6 @@
 
     <scm>
         <developerConnection>scm:git:https://github.com/tushargarg50/Spring5Course.git</developerConnection>
-        <tag>springcourse-0.0.3</tag>
+        <tag>HEAD</tag>
     </scm>
 </project>
