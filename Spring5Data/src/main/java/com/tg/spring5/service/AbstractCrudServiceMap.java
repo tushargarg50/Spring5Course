@@ -1,41 +1,31 @@
 package com.tg.spring5.service;
 
 import com.tg.spring5.model.BaseEntity;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 public abstract class AbstractCrudServiceMap<T extends BaseEntity, ID extends Long> implements CrudService<T, ID> {
 
-    private Map<ID, T> map = new HashMap<>();
-
     @Override
-    public T findById(ID id) {
-        return map.get(id);
+    public Optional<T> findById(ID id) {
+        return getRepository().findById(id);
     }
 
     @Override
-    public T save(T object) {
-        if (map.containsValue(object))
-            return map.entrySet().stream()
-                    .filter(entry -> entry.getValue().equals(object))
-                    .findFirst()
-                    .map(Map.Entry::getValue).get();
-        ID id = (ID) (object.getId() == null || object.getId() == 0L ? object.getNextId() : object.getId());
-        object.setId(id);
-        map.put(id, object);
-        return object;
+    public Optional<T> save(T object) {
+        return Optional.of(getRepository().save(object));
     }
 
     @Override
-    public boolean delete(T object) {
-        return map.entrySet().removeIf(entry -> entry.getValue().equals(object));
+    public void delete(T object) {
+        getRepository().delete(object);
     }
 
     @Override
-    public Collection<T> findAll() {
-        map.entrySet().forEach(entry -> System.out.println("Key : " + entry.getKey() + ", Value : " + entry.getValue()));
-        return map.values();
+    public Iterable<T> findAll() {
+        return getRepository().findAll();
     }
+
+    protected abstract CrudRepository<T, ID> getRepository();
 }

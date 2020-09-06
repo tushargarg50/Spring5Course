@@ -3,14 +3,16 @@ package com.tg.spring5.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "owners")
 public class Owner extends Person {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     private final Set<Pet> pets;
 
     public Owner(String firstName, String lastName, Address address, Set<Pet> pets) {

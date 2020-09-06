@@ -1,15 +1,15 @@
 package com.tg.spring5.service;
 
-import java.util.Collection;
+import java.util.Optional;
 
 public interface CrudService<T, ID> {
 
-    T findById(ID id);
+    Optional<T> findById(ID id);
 
-    T save(T object);
+    Optional<T> save(T object);
 
-    boolean delete(T object);
+    void delete(T object);
 
-    Collection<T> findAll();
+    Iterable<T> findAll();
 
 }

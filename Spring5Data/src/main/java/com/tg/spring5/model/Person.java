@@ -1,7 +1,9 @@
 package com.tg.spring5.model;
 
+import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
+@MappedSuperclass
 public class Person extends BaseEntity {
 
     private final String firstName;

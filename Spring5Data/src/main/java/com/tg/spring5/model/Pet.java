@@ -2,6 +2,7 @@ package com.tg.spring5.model;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -14,6 +15,7 @@ public class Pet extends BaseEntity {
     private final String name;
     private final LocalDate birthDate;
     @ManyToOne
+    @JoinColumn(name = "owner_id")
     private Owner owner;
 
     public Pet(PetType petType, String name, LocalDate birthDate) {
