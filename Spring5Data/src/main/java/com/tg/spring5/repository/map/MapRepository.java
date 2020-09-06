@@ -11,6 +11,8 @@ import java.util.*;
 @Scope("prototype")
 public class MapRepository<T extends BaseEntity, ID extends Long> implements CrudRepository<T, ID> {
 
+    private Long CURRENT_ID = 0L;
+
     private Map<ID, T> map = new HashMap<>();
 
     @Override
@@ -20,7 +22,7 @@ public class MapRepository<T extends BaseEntity, ID extends Long> implements Cru
                     .filter(entry -> entry.getValue().equals(s))
                     .findFirst()
                     .map(Map.Entry::getValue).map(t -> (S) t).get();
-        ID id = (ID) (s.getId() == null || s.getId() == 0L ? s.getNextId() : s.getId());
+        ID id = (ID) (s.getId() == null || s.getId() == 0L ? getNextId() : s.getId());
         s.setId(id);
         map.put(id, s);
         return s;
@@ -83,6 +85,11 @@ public class MapRepository<T extends BaseEntity, ID extends Long> implements Cru
     @Override
     public void deleteAll() {
         map = new HashMap<>();
+    }
+
+    public Long getNextId() {
+        CURRENT_ID = CURRENT_ID + 1L;
+        return CURRENT_ID;
     }
 
 }
