@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Pet extends BaseEntity {
 
     @Column
-    @Convert(converter = PetTypeConverter.class)
+    @Convert(converter = PetTypeIdConverter.class)
     private PetType petType;
     @Column
     private String name;

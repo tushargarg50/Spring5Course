@@ -1,15 +1,11 @@
 package com.tg.spring5.repository.map;
 
 import com.tg.spring5.model.BaseEntity;
-import org.springframework.context.annotation.Scope;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
-@Scope("prototype")
-public class MapRepository<T extends BaseEntity, ID extends Long> implements CrudRepository<T, ID> {
+public abstract class MapRepository<T extends BaseEntity, ID extends Long> implements CrudRepository<T, ID> {
 
     private Long CURRENT_ID = 0L;
 

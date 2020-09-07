@@ -4,7 +4,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter
-public class PetTypeConverter implements AttributeConverter<PetType, String> {
+public class PetTypeCodeConverter implements AttributeConverter<PetType, String> {
 
     @Override
     public String convertToDatabaseColumn(PetType petType) {
